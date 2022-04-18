@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .card {
+    background-color: #303030;
+    box-shadow: 0px 0px 10px 0px #00000080;
+    border-radius: 8px;
+  }
+  .nav-link {
+    margin: 0 1em;
+    cursor: pointer;
+  }
+  .nav-link:hover {
+    color: rgb(209, 213, 219);
+  }
+  .nav-link:active {
+    color: rgb(156, 163, 175);
+  }
+}
