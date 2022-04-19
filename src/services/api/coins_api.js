@@ -6,8 +6,10 @@ const headers = {
 };
 
 const endPoints = {
-  coins: () => "/coins",
-  coin: (uuid) => `/coin/${uuid}`,
-  history: (uuid) => `/${uuid}/history`,
-  exchanges: (uuid) => `/${uuid}/exchanges`,
+  coins: () => `${BASE_URL}/coins`,
+  coin: (uuid) => `${BASE_URL}/coin/${uuid}`,
+  history: (uuid) => `${BASE_URL}/${uuid}/history`,
+  exchanges: (uuid) => `${BASE_URL}/${uuid}/exchanges`,
 };
+
+export { headers, endPoints };
