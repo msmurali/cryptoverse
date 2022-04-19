@@ -10,7 +10,7 @@ const HomePage = ({ crypto, news }) => {
   const { data: newsData, status: newsStatus, error: newsErr } = news;
 
   return (
-    <div className="md:px-4">
+    <div className="md:px-2">
       <Header />
       {cryptoStatus !== "done" ? (
         <Loader />
@@ -80,7 +80,7 @@ const CryptoStats = ({ stats }) => {
   );
 };
 
-const CryptoCurrencies = ({ coins }) => {
+const CryptoCurrencies = ({ coins, count = 12 }) => {
   return (
     <div className="mx-4 md:mx-6 p-4 md:p-8">
       <h1 className="text-white font-medium mb-6 md:text-xl font-primary flex justify-between items-center">
@@ -90,7 +90,7 @@ const CryptoCurrencies = ({ coins }) => {
         </span>
       </h1>
       <div className="flex justify-between flex-wrap items-start">
-        {coins.slice(0, 12).map((coin) => (
+        {coins.slice(0, count).map((coin) => (
           <Card key={coin.uuid}>
             <div className="w-full flex justify-between items-center mb-4">
               <h1 className="font-medium capitalize text-secondary text-lg">
@@ -122,7 +122,7 @@ const CryptoCurrencies = ({ coins }) => {
   );
 };
 
-const CryptoNews = ({ news }) => {
+const CryptoNews = ({ news, count = 12 }) => {
   return (
     <div className="mx-4 md:mx-6 p-4 md:p-8">
       <h1 className="text-white font-medium mb-6 md:text-xl font-primary flex justify-between items-center">
@@ -132,7 +132,7 @@ const CryptoNews = ({ news }) => {
         </span>
       </h1>
       <div className="flex justify-between flex-wrap items-start">
-        {news.slice(0, 12).map((news) => {
+        {news.slice(0, count).map((news) => {
           return (
             <Card key={news.datePublished}>
               <div className="w-full flex justify-between items-center mb-4">
@@ -142,12 +142,19 @@ const CryptoNews = ({ news }) => {
                 <img
                   src={news?.image?.thumbnail?.contentUrl || Logo}
                   alt="thumbnail"
-                  className="w-14 h-14"
+                  className="w-14 h-14 rounded ml-4"
                 />
               </div>
               <div className="flex flex-col justify-evenly">
                 <p className="">{`${news.description.slice(0, 60)}...`}</p>
-                <p>{news.provider[0].name}</p>
+                <p>
+                  <img
+                    src={news.provider[0]?.image?.thumbnail?.contentUrl || Logo}
+                    alt="thumbnail"
+                    className="w-6 h-6 rounded inline mr-4"
+                  />
+                  {news?.provider[0]?.name || ""}
+                </p>
               </div>
             </Card>
           );
