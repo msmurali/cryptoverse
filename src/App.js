@@ -7,14 +7,14 @@ import { endPoints as newsApiEndPoints } from "./services/api/news_api";
 
 function App() {
   const cryptoApiConfig = React.useMemo(coinsApiEndPoints.coins, []);
-  // const newsApiConfig = React.useMemo(newsApiEndPoints.search, []);
+  const newsApiConfig = React.useMemo(newsApiEndPoints.search, []);
 
   const crypto = useFetch(cryptoApiConfig);
-  // const news = useFetch(newsApiConfig);
+  const news = useFetch(newsApiConfig);
 
   return (
     <div className="app min-h-screen bg-primary">
-      <HomePage crypto={crypto} />
+      <HomePage crypto={crypto} news={news} />
     </div>
   );
 }
