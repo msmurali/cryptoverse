@@ -17,10 +17,9 @@ const useFetch = (options) => {
 
     axios
       .request(options)
-      .then((response) => setData(response.data))
-      .catch((error) => setError(error));
-
-    setStatus(fetchStatus.DONE);
+      .then((response) => setData(response.data.data))
+      .catch((error) => setError(error))
+      .finally(() => setStatus(fetchStatus.DONE));
   }, [options]);
 
   return { data, status, error };

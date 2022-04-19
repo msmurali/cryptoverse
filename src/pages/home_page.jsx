@@ -1,17 +1,25 @@
 import React from "react";
 import Header from "../components/header";
+import { formatNum } from "../services/utils/helpers";
 
-const HomePage = () => {
+const HomePage = ({ crypto }) => {
+  const { data: cryptoData, status: cryptoStatus, error: cryptoErr } = crypto;
+  // // const { newsData, newsStatus, newsErr } = news;
+
   return (
     <React.Fragment>
       <Header />
-      <CryptoStats />
+      {cryptoStatus === "done" ? (
+        <CryptoStats stats={cryptoData.stats} />
+      ) : (
+        <></>
+      )}
       <Card />
     </React.Fragment>
   );
 };
 
-const CryptoStats = () => {
+const CryptoStats = ({ stats }) => {
   return (
     <div className="font-primary mx-4 md:mx-6 p-4 md:p-8">
       <h1 className="text-white font-medium mb-6 md:text-xl">Crypto Stats</h1>
@@ -20,31 +28,42 @@ const CryptoStats = () => {
           <p className="text-secondary uppercase font-medium text-sm mb-1">
             coins
           </p>
-          <h1 className="text-white font-semibold text-2xl">17.3K</h1>
+          <h1 className="text-white font-semibold text-2xl">
+            {formatNum(stats.totalCoins)}
+          </h1>
         </div>
         <div className="mb-6">
           <p className="text-secondary uppercase font-medium text-sm mb-1">
-            coins
+            markets
           </p>
-          <h1 className="text-white font-semibold text-2xl">17.3K</h1>
-        </div>
-        <div className="mb-6">
-          <p className="text-secondary uppercase font-medium text-sm mb-1">
-            market cap
-          </p>
-          <h1 className="text-white font-semibold text-2xl">$ 2.4T</h1>
+          <h1 className="text-white font-semibold text-2xl">
+            {" "}
+            {formatNum(stats.totalMarkets)}
+          </h1>
         </div>
         <div className="mb-6">
           <p className="text-secondary uppercase font-medium text-sm mb-1">
             exchanges
           </p>
-          <h1 className="text-white font-semibold text-2xl">373</h1>
+          <h1 className="text-white font-semibold text-2xl">
+            {formatNum(stats.totalExchanges)}
+          </h1>
         </div>
-        <div>
+        <div className="mb-6">
+          <p className="text-secondary uppercase font-medium text-sm mb-1">
+            market cap
+          </p>
+          <h1 className="text-white font-semibold text-2xl">
+            {formatNum(stats.totalMarketCap)}
+          </h1>
+        </div>
+        <div className="mb-6">
           <p className="text-secondary uppercase font-medium text-sm mb-1">
             24h value
           </p>
-          <h1 className="text-white font-semibold text-2xl">$ 92.3B</h1>
+          <h1 className="text-white font-semibold text-2xl">
+            {formatNum(stats.total24hVolume)}
+          </h1>
         </div>
       </div>
     </div>

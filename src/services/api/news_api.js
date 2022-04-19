@@ -7,5 +7,18 @@ const headers = {
 };
 
 const endPoints = {
-  search: () => `/search`,
+  search: (query) => ({
+    method: "GET",
+    url: `${BASE_URL}/search`,
+    params: {
+      q: query,
+      count: "50",
+      freshness: "Day",
+      textFormat: "Raw",
+      safeSearch: "Off",
+    },
+    headers,
+  }),
 };
+
+export { endPoints };

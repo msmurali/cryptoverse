@@ -5,11 +5,22 @@ const headers = {
   "X-RapidAPI-Key": "4201501428mshc40cc43463959e1p179365jsnf3eb6fcddfed",
 };
 
-const endPoints = {
-  coins: () => `${BASE_URL}/coins`,
-  coin: (uuid) => `${BASE_URL}/coin/${uuid}`,
-  history: (uuid) => `${BASE_URL}/${uuid}/history`,
-  exchanges: (uuid) => `${BASE_URL}/${uuid}/exchanges`,
+const configOptions = {
+  method: "GET",
+  headers,
 };
 
-export { headers, endPoints };
+const endPoints = {
+  coins: () => ({
+    ...configOptions,
+    url: `${BASE_URL}/coins`,
+  }),
+  coin: (uuid) => ({ ...configOptions, url: `${BASE_URL}/coin/${uuid}` }),
+  history: (uuid) => ({ ...configOptions, url: `${BASE_URL}/${uuid}/history` }),
+  exchanges: (uuid) => ({
+    ...configOptions,
+    url: `${BASE_URL}/${uuid}/exchanges`,
+  }),
+};
+
+export { endPoints };
